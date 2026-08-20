@@ -1,0 +1,8 @@
+lr_pair,external_atlas_direction,our_gse178341_hits,replicated,biological_meaning
+GAS6-AXL,M2-like Macro -> BASP1+ matPC,Macro|Peri=0.507; Peri|Macro=0.489,True,TAM->Peri 耐受轴
+LGALS9 (multi-receptor),M2-like Macro -> BASP1+ matPC,Macro|Peri=0.866,True,Galectin-9 免疫抑制信号
+SIRPA-CD47,M2-like Macro -> BASP1+ matPC,Peri|Macro=0.485,True,"""别吃我""信号"
+TYROBP-CD44,M2-like Macro -> BASP1+ matPC,Peri|Macro=1.977,True,髓系激活相关
+FASLG-TNFRSF1A/FAS,CD8_Tex/TRM -> BASP1+ matPC,TCD8|Peri=0.186,True,细胞毒性/凋亡诱导
+LTB-LTBR,CD8_Tem/Tm -> BASP1+ matPC,TCD8|Peri=0.449,True,三级淋巴结构(TLS)组织信号
+CD74-APP/COPA,CD8_TRM/Tex -> BASP1+ matPC,Peri|Macro=2.552,True,MIF-CD74轴

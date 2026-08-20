@@ -1,0 +1,5 @@
+original_paper_supplementary/
+scratch/
+__pycache__/
+*.pyc
+.DS_Store

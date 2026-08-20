@@ -1,0 +1,5 @@
+family,n_tests,n_sig_raw_p05,n_sig_fdr_q05,n_lost_after_fdr
+A_ARGscore_vs_modules,15,13,13,0
+B_NNLS_vs_ARGscore,21,18,18,0
+C_vs_original_CIBERSORT,33,29,29,0
+D_MSI_adjusted,12,8,8,0
