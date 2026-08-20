@@ -936,8 +936,9 @@ for i, r in enumerate(refs, 1):
 
 h1('数据与代码可及性说明')
 p('本研究涉及的全部原始分析代码(Python,基于pandas/numpy/scipy/h5py/lifelines/scikit-survival/matplotlib/'
-  'scikit-learn/CellPhoneDB v5.0.1)、图表及中间结果数据表保存于项目工作目录analysis_output文件夹'
-  '(figures/scripts/data三个子目录),完整分析流程记录见项目日志"日志.md"。TCGA突变/CNV数据通过UCSC Xena'
+  'scikit-learn/CellPhoneDB v5.0.1)、图表及中间结果数据表已公开发布于GitHub仓库:'
+  'https://github.com/yunzhennan0431-maker/argscore-crc-revisited(MIT许可,不含原文版权所有的'
+  'Supplementary Material及任何原始测序/芯片数据),完整分析流程记录见项目日志"日志.md"。TCGA突变/CNV数据通过UCSC Xena'
   '经典枢纽(xenaPython接口)获取;CellPhoneDB配体-受体数据库为公开学术资源,通过官方工具下载,无需额外'
   '授权。Zhang等(2023)发表的Supplementary Material(含逐患者临床数据及CIBERSORT/ssGSEA/'
   'MCPcounter结果)通过期刊官网公开下载,保存于analysis_output/original_paper_supplementary文件夹,'
