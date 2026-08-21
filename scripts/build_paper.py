@@ -98,10 +98,10 @@ doc.add_paragraph()
 # ============================================================
 # Author block
 # ============================================================
-p('Z. Yun¹*', bold=True)
+p('Z. Yun¹', bold=True)
 p('¹Department of Colorectal & Anal Surgery, General Surgery Center, The First Hospital of Jilin University')
 p('ORCID: Z. Yun, 0009-0004-4270-2470')
-p('*Correspondence: Z. Yun, [通讯作者邮箱待补充]')
+p('*Correspondence: [通讯作者姓名、单位、邮箱待补充]')
 
 doc.add_paragraph()
 
