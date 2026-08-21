@@ -521,7 +521,7 @@ add_table(
 )
 caption('表5. ARGscore分组:中位数分组 vs 最优截断点法(三队列对照)')
 fig("cutoff_sensitivity_km_comparison.png", width=17.0)
-caption('图13. 中位数分组(实线)vs 最优截断点分组(虚线)的Kaplan-Meier生存曲线对比,三个bulk队列。')
+caption('图13. 中位数分组(实线)vs 最优截断点分组(虚线)的Kaplan-Meier生存曲线对比,三个bulk队列。红色为ARGscore高分组,蓝色为低分组,纵轴为总生存概率(OS)。')
 p('GSE39582和TCGA-COAD/READ两个队列中,两种分组方法得到的HR和显著性水平高度接近,结论完全一致。'
   'GSE17536队列出现了一个值得说明的现象:中位数分组下这一单独的二分类Cox比较未达统计显著'
   '(HR=1.46,P=0.113),但最优截断点分组下(将ARGscore最高的约17.5%患者划为高分组)HR跃升至2.74且'
@@ -568,7 +568,7 @@ p('细胞组成模块与该队列官方CIBERSORT结果的相关性检验如下(�
   '最强的一组外部验证——因为它比对的不是本研究自己构建的marker基因集,而是官方CIBERSORT算法独立'
   '跑出的结果。')
 fig("module_vs_original_cibersort_validation.png", width=17.0)
-caption('图14. 本研究复现的细胞组成模块(z-score平均法 vs NNLS反卷积)与已发表队列CIBERSORT输出的Spearman相关系数,三队列汇总。')
+caption('图14. 本研究复现的细胞组成模块(z-score平均法[蓝]vs NNLS反卷积[红])与已发表队列CIBERSORT输出的Spearman相关系数,三队列汇总。')
 p('进一步直接检验ARGscore本身与该队列CIBERSORT细胞比例的相关性(图15):ARGscore与CD8⁺T细胞比例在三个'
   '队列中均显著负相关(ρ=-0.25至-0.42,全部P<0.0001),方向与"ARGscore高→预后差→免疫冷"的核心'
   '叙事完全一致且高度稳健。ARGscore与巨噬细胞的相关性最初用CIBERSORT M1+M2合并比例检验时并不稳健'
@@ -578,7 +578,7 @@ p('进一步直接检验ARGscore本身与该队列CIBERSORT细胞比例的相关
   '相关性在三个队列中不完全一致(仅GSE39582显著负相关),提示B细胞/TLS轴是三个模块中复现稳健性相对'
   '最弱的一个。')
 fig("argscore_vs_original_cibersort.png", width=17.0)
-caption('图15. 本研究复现的ARGscore与已发表队列CIBERSORT细胞比例(M2巨噬细胞/CD8⁺T细胞/B细胞)的散点关系,三队列合并展示。')
+caption('图15. 本研究复现的ARGscore与已发表队列CIBERSORT细胞比例(M2巨噬细胞/CD8⁺T细胞/B细胞)的散点关系,三队列合并展示(蓝=GSE39582,绿=GSE17536,红=TCGA)。')
 p('综合来看,本节利用一个大规模、公开可及的已发表队列免疫浸润记录完成了两件事:(1)量化了患者纳入'
   '差异对数值层面不一致的贡献(TCGA队列是主要来源);(2)用该队列的官方CIBERSORT结果,对本研究独立'
   '复现的细胞组成模块和ARGscore的核心方向性结论做了迄今最强的外部验证。这使得"ARGscore绝对数值与'
@@ -589,7 +589,7 @@ p('3.3/3.9节分别报告了三个独立队列的多因素Cox HR,但仅以文字
   '本节将三个队列的多因素Cox HR(ARGscore校正年龄/性别/分期后)在log(HR)尺度上做固定效应(逆方差加权)'
   '和随机效应(DerSimonian-Laird[15])两种meta分析,并绘制森林图(图16)。')
 fig("argscore_meta_analysis_forest_plot.png", width=15.0)
-caption('图16. 三个独立bulk队列ARGscore多因素Cox HR的meta分析森林图。')
+caption('图16. 三个独立bulk队列ARGscore多因素Cox HR的meta分析森林图。方块为各队列HR点估计及95% CI,菱形为随机效应模型汇总估计,虚线标示HR=1(无效应参考线)。')
 p('三个队列间存在中等程度异质性(Cochran\'s Q=5.12,df=2,I²=61.0%),与此前已指出的"TCGA队列效应量'
   '偏弱"这一异质性来源一致,因此以更保守的随机效应模型作为主要汇总估计:随机效应汇总HR=2.01'
   '(95% CI 1.43–2.83,P=5.9×10⁻⁵);固定效应模型给出相近的点估计但置信区间更窄(HR=1.99,'
@@ -853,7 +853,7 @@ add_table(
 )
 caption('表11. ARGscore与ssGSEA StromalScore/ImmuneScore/ESTIMATEScore的Spearman相关性')
 fig("estimate_crossvalidation.png", width=15.0)
-caption('图24. ARGscore与ESTIMATE算法(ssGSEA StromalScore/ImmuneScore/ESTIMATEScore)的关联散点图,三队列颜色区分。')
+caption('图24. ARGscore与ESTIMATE算法(ssGSEA StromalScore/ImmuneScore/ESTIMATEScore)的关联散点图,三队列颜色区分(蓝=GSE39582,绿=GSE17536,红=TCGA),图例括号内为各队列Spearman ρ。')
 p('结果显示,StromalScore与ARGscore在三个队列中方向一致且稳健显著正相关(ρ=0.36–0.54,全部P<0.0001),与'
   '3.13节CIBERSORT验证中ARGscore与M2巨噬细胞/基质相关细胞比例的正相关方向一致,即使考虑到VSIG4基因重叠'
   '这一结构性因素,三队列效应量的一致性与3.9节NNLS反卷积、3.13节CIBERSORT两种独立方法得到的周细胞/基质'
