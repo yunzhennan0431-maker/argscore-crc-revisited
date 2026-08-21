@@ -1057,9 +1057,8 @@ p('本研究所用全部原始数据均为公开数据集,可通过NCBI GEO(acce
   '(xenaPython接口)获取;ssGSEA计算使用开源Python包gseapy完成。')
 p('本研究涉及的全部原始分析代码、图表及中间结果数据表已公开发布于GitHub仓库:'
   'https://github.com/yunzhennan0431-maker/argscore-crc-revisited(MIT许可,基于Python,依赖'
-  'pandas/numpy/scipy/h5py/lifelines/scikit-survival/matplotlib/scikit-learn/gseapy/CellPhoneDB v5.0.1);'
-  '该仓库不含原文版权所有的Supplementary Material及任何原始测序/芯片数据。完整分析流程记录见项目日志'
-  '"日志.md"。如有进一步问题,请联系通讯作者。')
+  'pandas/numpy/scipy/h5py/lifelines/scikit-survival/matplotlib/scikit-learn/gseapy/CellPhoneDB v5.0.1)。'
+  '如有进一步问题,请联系通讯作者。')
 
 # ============================================================
 # References
