@@ -39,11 +39,13 @@ figures/    all generated figures (PNG)
 | Formal CellPhoneDB ligand-receptor analysis | `extract_cpdb_input.py`, `summarize_cellphonedb.py`, `plot_cpdb_summary.py` |
 | TCGA mutation/CNV | `analyze_tcga_mutcnv.py`, `analyze_znf532_cnv_expr.py` |
 | External CIBERSORT cross-validation | `validate_against_original_cibersort.py` |
-| Meta-analysis / MSI adjustment / FDR correction | `meta_analysis_argscore_hr.py`, `msi_adjusted_association.py`, `fdr_correction_summary.py` |
+| Meta-analysis / MSI adjustment / FDR correction | `meta_analysis_argscore_hr.py`, `msi_adjusted_association.py`, `msi_adjusted_cox_argscore.py`, `fdr_correction_summary.py` |
+| ESTIMATE cross-validation (ssGSEA StromalScore/ImmuneScore) | `estimate_crossvalidation.py`, `plot_estimate_crossvalidation.py` |
 | Immunotherapy cohort (pseudobulk from single-cell) | `prepare_indices.py`, `extract_pseudobulk.sh`, `aggregate_pseudobulk.py`, `analyze_icb.py`, `analyze_response.py` |
 | Upstream regulator analysis (TF enrichment, methylation) | `enrichr_tf_enrichment.py`, `tf_target_corr_tcga.py`, `tf_target_heatmap.py`, `methylation_analysis.py`, `methylation_figure.py`, `argscore_tf_correlation.py`, `tf_argscore_figure.py` |
 | Downstream functional readout & drug connectivity | `fetch_full_tcga_expr.py`, `angiogenic_signaling_downstream.py`, `angio_signaling_figure.py`, `cmap_l1000fwd.py` |
-| Manuscript assembly (docx generation, not the manuscript itself) | `build_paper.py`, `build_report.py` |
+| Manuscript rendering (generic Markdown->docx renderer; the manuscript .md itself is not published here) | `render_paper.py` |
+| Working-report assembly (docx generation, not the report itself) | `build_report.py` |
 
 ## Data sources
 
