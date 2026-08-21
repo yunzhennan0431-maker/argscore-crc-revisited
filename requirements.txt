@@ -9,3 +9,4 @@ scikit-survival
 python-docx
 requests
 xenaPython
+gseapy

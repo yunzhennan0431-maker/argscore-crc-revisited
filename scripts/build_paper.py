@@ -96,16 +96,14 @@ title.alignment = WD_ALIGN_PARAGRAPH.CENTER
 doc.add_paragraph()
 
 # ============================================================
-# Graphical Abstract
+# Author block
 # ============================================================
-h1('图形摘要')
-fig("mechanism_overview.png", width=14.0)
-caption('图形摘要。ARGscore的5个基因(VSIG4、CXCL10、CXCL13、MEIS2、ZNF532)从上游调控(转录因子通路、'
-        'DNA甲基化)到细胞类型归属(肿瘤相关巨噬细胞极化、T细胞驱动的三级淋巴结构组织、血管周细胞活化)、'
-        '经BASP1⁺周细胞亚型实现细胞间信号交汇、复合评分(ARGscore)构建及其与真实血管生成配体VEGFA相关性的'
-        '解离、直至临床预后关联的完整机制示意。实线箭头表示有数据支持的关联,虚线箭头表示提示性/尚未通过'
-        '湿实验验证的假设性关联。')
-doc.add_page_break()
+p('Z. Yun¹*', bold=True)
+p('¹Department of Colorectal & Anal Surgery, General Surgery Center, The First Hospital of Jilin University')
+p('ORCID: Z. Yun, 0009-0004-4270-2470')
+p('*Correspondence: Z. Yun, [通讯作者邮箱待补充]')
+
+doc.add_paragraph()
 
 # ============================================================
 # Abstract
@@ -119,23 +117,55 @@ p('背景:基于bulk反卷积算法(CIBERSORT、ssGSEA、ESTIMATE等)构建的�
 p('方法:分析了3个独立结直肠癌单细胞转录组数据集(GSE81861,n=590细胞;GSE178341,n=370,115细胞;GSE146771,'
   'n=10,468细胞)、1个空间转录组数据集(GSE267401,4例患者)、3个原发文献使用过的bulk队列(GSE39582,n=585;'
   'GSE17536,n=177;TCGA-COAD/READ,n=380),对ARGscore的5个基因及36个HALLMARK_ANGIOGENESIS基因集成员逐一'
-  '进行细胞类型归因,并计算细胞类型独立marker模块与ARGscore的相关性、多因素Cox回归及时间依赖AUC。此外,'
-  '利用一个独立发表的泛癌种肿瘤血管单细胞图谱(~200,000细胞、372例患者、31种癌型)对核心发现进行了跨数据集'
-  '交叉验证,并探索性分析了一个免疫治疗队列(GSE205506)。')
+  '进行细胞类型归因,并计算细胞类型独立marker模块与ARGscore的相关性、多因素Cox回归及时间依赖AUC。利用'
+  '一个独立发表的泛癌种肿瘤血管单细胞图谱(~200,000细胞、372例患者、31种癌型)对核心发现进行跨数据集交叉'
+  '验证,并用正式NNLS反卷积、正式CellPhoneDB统计分析(1000次置换检验)分别独立复现细胞组成关联及配体-受体'
+  '信号。进一步用一个大规模已发表队列(合并TCGA+GSE39582+GSE17536共1214例)的官方CIBERSORT记录及'
+  'ssGSEA-ESTIMATE算法(StromalSignature/ImmuneSignature各141基因)两种正交反卷积方法做外部交叉验证,用'
+  '随机效应模型对三队列预后效应做meta分析,将MSI/MMR状态分别作为协变量校正细胞组成关联及ARGscore自身的'
+  '多因素Cox HR,并对全篇相关性检验分组做Benjamini-Hochberg FDR多重检验校正。上游机制方面,用TRRUST/'
+  'ChEA/ENCODE数据库做TF-靶基因富集并在TCGA中做数据驱动验证,分析TCGA甲基化数据检验5个基因启动子区CpG'
+  '甲基化与表达的关联,并在TCGA全转录组范围内计算ARGscore与全部转录因子的Spearman相关。下游机制方面,'
+  '检验ARGscore与内皮/周细胞受体基因及血管生成主配体VEGFA的关联,并用CMap/L1000FWD做药物连接性分析'
+  '探索候选逆转/拟表型化合物。此外探索性分析了两个免疫治疗队列(GSE205506治疗组间比较;GSE236581,'
+  '20例患者级CR/PR/SD响应标签)及cutoff方法(中位数vs最优截断点)的稳健性。')
 p('结果:5个ARGscore基因在单细胞分辨率下分别锚定于三个相互独立的肿瘤微环境细胞程序:VSIG4与CXCL10特异性'
   '富集于肿瘤相关巨噬细胞(尤其是C1QC⁺补体相关TAM亚型);CXCL13富集于CD8⁺/CD4⁺T细胞;ZNF532与MEIS2富集于'
   '血管周细胞/肌成纤维细胞谱系。在3个独立bulk队列中,ARGscore与周细胞marker模块的相关性均为最强'
-  '(ρ = 0.49–0.71),且ARGscore在校正年龄、性别、分期后仍是独立预后因子(HR = 1.43–2.65)。利用独立的泛癌种'
-  '血管图谱进一步发现,ZNF532的高表达亚群特异性富集于该图谱报道的"BASP1⁺内质网应激相关促血管生成周细胞"'
-  '亚型,而这一模式在对照基因MEIS2中未见复现。同时发现结肠癌(COAD)与直肠癌(READ)在该周细胞亚型的预后'
-  '意义上存在方向性分歧。正式NNLS反卷积及正式CellPhoneDB统计分析(1000次置换检验)进一步在三个独立bulk'
-  '队列及自有单细胞数据中分别独立复现了周细胞/内皮丰度-ARGscore关联及TAM/CD8T-周细胞配体-受体信号,'
-  'TCGA突变/CNV分析显示5个基因体细胞突变率均低于4%而ZNF532拷贝数缺失率高达71.1%。')
+  '(ρ = 0.49–0.71),且ARGscore在校正年龄、性别、分期后仍是独立预后因子(HR = 1.43–2.65;三队列随机效应'
+  'meta分析汇总HR=2.01,95% CI 1.43–2.83)。利用独立的泛癌种血管图谱进一步发现,ZNF532的高表达亚群特异性'
+  '富集于该图谱报道的"BASP1⁺内质网应激相关促血管生成周细胞"亚型,而这一模式在对照基因MEIS2中未见复现。'
+  '同时发现结肠癌(COAD)与直肠癌(READ)在该周细胞亚型的预后意义上存在方向性分歧;TCGA突变/CNV分析显示'
+  '5个基因体细胞突变率均低于4%而ZNF532拷贝数缺失率高达71.1%。基于1214例已发表队列CIBERSORT记录及'
+  'ssGSEA-ESTIMATE算法的两种独立外部验证均支持ARGscore携带基质/M2巨噬细胞组成信息(CIBERSORT:三队列'
+  '18项检验全部方向正确且显著;ESTIMATE StromalScore:ρ=0.36–0.54,全部P<0.0001),而ARGscore与ESTIMATE'
+  '笼统ImmuneScore的关联方向不一致,提示其编码的是特定免疫细胞亚型而非广谱免疫浸润。ARGscore与免疫模块的'
+  '关联及其自身预后HR在校正MSI/MMR状态后均基本不变(GSE39582:HR=2.25校正前后不变,P<0.0001;MSI/MMR'
+  '哑变量本身不显著),81项相关性检验经FDR校正后68项原始显著结果无一项失去显著性。上游机制方面,'
+  'CXCL10/CXCL13受经典IFN-STAT1/IRF及NF-κB通路调控(TCGA验证最强ρ=0.79),TGF-β/SMAD通路与MEIS2/ZNF532'
+  '(周细胞活化标志基因)正相关,5个基因的CpG甲基化均与自身表达显著负相关;下游方面,ARGscore与内皮/周'
+  '细胞受体基因关联,但与血管生成主配体VEGFA无关(ρ=−0.04,不显著),提示该评分编码的是细胞组成而非血管'
+  '新生驱动信号。药物连接性分析提示HDAC抑制剂为候选逆转化合物,呼应E2F1负相关这一发现。两个免疫治疗队列'
+  '的探索性分析均提示ARGscore低与更好响应的方向一致但未达统计显著(GSE236581:Kruskal-Wallis P=0.061),'
+  '受限于样本量。')
 p('结论:ARGscore的预后价值很可能并非源于其对血管生成强度的直接测量,而是源于其对肿瘤微环境中三种独立'
-  '细胞程序(TAM极化、T细胞/TLS组织、周细胞活化状态)组成比例的间接编码。本研究将ZNF532确立为一个此前'
+  '细胞程序(TAM极化、T细胞/TLS组织、周细胞活化状态)组成比例的间接编码。这一结论在两种独立反卷积算法'
+  '(CIBERSORT、ESTIMATE)、单细胞与空间转录组、MSI/MMR校正、多重检验校正及cutoff方法敏感性检验下均保持'
+  '稳健,并获得上游转录调控/甲基化证据与下游VEGFA解离证据的机制层面支持。本研究将ZNF532确立为一个此前'
   '未被癌症研究关注、具有明确细胞类型特异性和跨数据集可重复性的候选基因,为后续机制研究提供了具体、'
   '可检验的假说。')
-p('关键词:结直肠癌;血管生成;单细胞转录组;肿瘤微环境;血管周细胞;预后模型;ZNF532', bold=True, size=10.5)
+p('关键词:结直肠癌;血管生成;单细胞转录组;肿瘤微环境;血管周细胞;预后模型;ZNF532;ESTIMATE;微卫星不稳定性', bold=True, size=10.5)
+
+# ============================================================
+# Graphical Abstract
+# ============================================================
+h1('图形摘要')
+fig("mechanism_overview.png", width=14.0)
+caption('图形摘要。ARGscore的5个基因(VSIG4、CXCL10、CXCL13、MEIS2、ZNF532)从上游调控(转录因子通路、'
+        'DNA甲基化)到细胞类型归属(肿瘤相关巨噬细胞极化、T细胞驱动的三级淋巴结构组织、血管周细胞活化)、'
+        '经BASP1⁺周细胞亚型实现细胞间信号交汇、复合评分(ARGscore)构建及其与真实血管生成配体VEGFA相关性的'
+        '解离、直至临床预后关联的完整机制示意。实线箭头表示有数据支持的关联,虚线箭头表示提示性/尚未通过'
+        '湿实验验证的假设性关联。')
 
 doc.add_page_break()
 
@@ -153,13 +183,13 @@ p('然而,这一研究范式存在一个尚未被充分正视的方法论问题:
   '更重要的是,这类预后基因签名的命名通常直接沿用其基因集的功能注释(如"血管生成相关"),但这一命名所暗示的'
   '生物学过程,是否真的是该签名预测价值的来源,还是签名恰好捕捉了肿瘤微环境细胞组成的某种间接代理,这一问题'
   '很少在单细胞分辨率下得到系统检验。')
-p('本研究以结直肠癌中一个具有代表性的血管生成相关预后模型ARGscore为案例展开分析。ARGscore由Zhang等人基于36个'
+p('本研究以结直肠癌中一个具有代表性的血管生成相关预后模型ARGscore为案例展开分析。ARGscore由Zhang等人[1]基于36个'
   'HALLMARK_ANGIOGENESIS基因集成员构建,通过一致性聚类识别出两个"血管生成亚型",并利用LASSO-Cox回归筛选出'
   'VSIG4、CXCL10、CXCL13、MEIS2、ZNF532五个基因构建了最终的预后评分公式。该研究报道ARGscore与CIBERSORT/'
   'ESTIMATE反卷积得到的免疫细胞浸润、微卫星不稳定性(MSI)、肿瘤干性等特征显著相关,但所有结论均建立在bulk'
   '反卷积的间接推断之上,未能在单细胞分辨率下验证这5个基因的真实细胞来源。')
 p('值得注意的是,在本研究的文献查证过程中意外发现,ZNF532——ARGscore中权重最大的基因——此前唯一被报道的功能'
-  '是其环状RNA亚型cZNF532在糖尿病视网膜病变中调控周细胞退化与血管稳定性,而其在肿瘤血管微环境中的作用此前'
+  '是其环状RNA亚型cZNF532在糖尿病视网膜病变中调控周细胞退化与血管稳定性[6],而其在肿瘤血管微环境中的作用此前'
   '完全未被研究。这一"意外基因出现在意外位置"的现象,构成了本研究的核心切入点:一个此前仅在非肿瘤性微血管'
   '病变中被报道的基因,为何会出现在结直肠癌的血管生成相关预后模型中,其背后是否存在可推广、可检验的细胞'
   '生物学机制?')
@@ -178,14 +208,14 @@ p('本研究使用的公开数据集汇总于表1。所有数据均通过NCBI GE
 add_table(
     headers=['数据集', '类型', '规模', '用途'],
     rows=[
-        ['GSE81861(Li et al., Nat Genet 2017)', 'scRNA-seq(Smart-seq2)', '590个标注细胞,11例CRC患者', '初步细胞类型归因'],
-        ['GSE178341(Pelka et al., Cell 2021)', 'scRNA-seq(10x)', '370,115个细胞,181个样本', '大样本细胞类型归因与修正'],
-        ['GSE146771(Zhang et al., Cell 2020)', 'scRNA-seq(Smart-seq2)', '10,468个细胞', '第三方独立定量验证'],
+        ['GSE81861(Li et al., Nat Genet 2017)[2]', 'scRNA-seq(Smart-seq2)', '590个标注细胞,11例CRC患者', '初步细胞类型归因'],
+        ['GSE178341(Pelka et al., Cell 2021)[3]', 'scRNA-seq(10x)', '370,115个细胞,181个样本', '大样本细胞类型归因与修正'],
+        ['GSE146771(Zhang et al., Cell 2020)[4]', 'scRNA-seq(Smart-seq2)', '10,468个细胞', '第三方独立定量验证'],
         ['GSE267401', '空间转录组(10x Visium)', '4例患者(2原发+2转移)', '组织内空间共定位验证'],
-        ['GSE39582', 'bulk(Affymetrix GPL570)', '585例CRC', 'bulk-单细胞关联验证'],
-        ['GSE17536', 'bulk(Affymetrix GPL570)', '177例CRC', '独立复现'],
-        ['TCGA-COAD/READ', 'bulk(RNA-seq)', '380例CRC(COAD 286+READ 94)', '独立复现;COAD/READ亚组分析'],
-        ['Pan-tumor Vasculature Atlas(Pan et al., Nature 2024)', 'scRNA-seq(在线浏览器查询)', '~200,000细胞,372例患者,31种癌型', '独立跨癌种交叉验证'],
+        ['GSE39582(Marisa et al., PLoS Med 2013)[10]', 'bulk(Affymetrix GPL570)', '585例CRC', 'bulk-单细胞关联验证'],
+        ['GSE17536(Smith et al., Gastroenterology 2010)[11]', 'bulk(Affymetrix GPL570)', '177例CRC', '独立复现'],
+        ['TCGA-COAD/READ(TCGA Network, Nature 2012)[12]', 'bulk(RNA-seq)', '380例CRC(COAD 286+READ 94)', '独立复现;COAD/READ亚组分析'],
+        ['Pan-tumor Vasculature Atlas(Pan et al., Nature 2024)[5]', 'scRNA-seq(在线浏览器查询)', '~200,000细胞,372例患者,31种癌型', '独立跨癌种交叉验证'],
         ['GSE205506', 'scRNA-seq(10x,pseudobulk)', '40个样本', '免疫治疗探索性分析'],
     ],
     widths=[6.0, 3.5, 4.5, 3.5]
@@ -194,7 +224,7 @@ caption('表1. 本研究使用的公开数据集')
 
 h2('2.2 ARGscore计算')
 p('36个血管生成相关基因(angiogenesis-related genes, ARGs)取自MSigDB HALLMARK_ANGIOGENESIS基因集,'
-  '与Zhang等(2023)构建该模型时所用基因集一致。ARGscore按该模型已发表的公式计算:')
+  '与Zhang等(2023)[1]构建该模型时所用基因集一致。ARGscore按该模型已发表的公式计算:')
 p('ARGscore = 0.2754 × ZNF532 + 0.1833 × VSIG4 + 0.1599 × MEIS2 − 0.1619 × CXCL10 − 0.1215 × CXCL13',
   bold=True, align=WD_ALIGN_PARAGRAPH.CENTER)
 p('该公式直接作用于各数据集标准化后的log2表达值。')
@@ -223,7 +253,7 @@ p('利用Pan-tumor Vasculature Atlas官方在线数据浏览器(resource.yin-lab
 h2('2.6 统计分析')
 p('所有相关性分析采用Spearman秩相关;组间比较采用Mann-Whitney U检验或Kruskal-Wallis检验;生存分析采用'
   'log-rank检验及Cox比例风险模型。统计学显著性水平设定为双侧P < 0.05。对多组相关性检验(3.3、3.9、'
-  '3.13、3.15节),另按各自然家族分别做Benjamini-Hochberg多重检验校正(详见3.16节)。所有分析基于'
+  '3.13、3.15节),另按各自然家族分别做Benjamini-Hochberg多重检验校正[16](详见3.16节)。所有分析基于'
   'Python 3.9(pandas、numpy、scipy、h5py、lifelines、scikit-survival、matplotlib、statsmodels)完成。')
 
 h2('2.7 正式反卷积、配体-受体分析与体细胞变异分析')
@@ -231,9 +261,9 @@ p('为验证2.4节marker基因z-score平均法及3.6节外部图谱配体-受体
   '分析。(1)非负最小二乘(NNLS)反卷积:以GSE178341的clMidwayPr细胞类型标注为参照,取Macrophage、CD8⁺T、'
   'B、内皮、周细胞、上皮、成纤维细胞7类细胞在36个marker基因上的平均表达构建参照特征矩阵,对参照矩阵与'
   '各bulk队列表达量分别做逐基因min-max归一化后,用scipy.optimize.nnls对每个bulk样本求解7类细胞比例'
-  '(归一化至总和为1)。该方法与CIBERSORT同属"参照特征矩阵+回归"框架,但以NNLS替代nu-SVR,并以配对的CRC'
+  '(归一化至总和为1)。该方法与CIBERSORT[14]同属"参照特征矩阵+回归"框架,但以NNLS替代nu-SVR,并以配对的CRC'
   '组织单细胞图谱替代仅覆盖外周血免疫细胞、且需学术授权才能获取的LM22特征矩阵。(2)正式CellPhoneDB分析:'
-  '安装官方CellPhoneDB v5.0.1统计分析方法(1000次细胞标签置换检验,阈值0.1,P<0.05为显著),对GSE178341中'
+  '安装官方CellPhoneDB v5.0.1[13]统计分析方法(1000次细胞标签置换检验,阈值0.1,P<0.05为显著),对GSE178341中'
   'Macrophage、CD8⁺T、周细胞(及内皮、B细胞作背景对照)各随机抽样1200个细胞,检验其在CellPhoneDB官方'
   '配体-受体数据库中的显著互作。(3)体细胞突变与拷贝数变异(CNV)分析:通过UCSC Xena经典枢纽'
   '(tcga.xenahubs.net)提取TCGA-COAD/READ中5个ARGscore基因的MC3基因层面二值化突变数据及GISTIC2阈值化'
@@ -242,7 +272,7 @@ p('为验证2.4节marker基因z-score平均法及3.6节外部图谱配体-受体
 h2('2.8 上游调控层分析方法')
 p('为回应"这5个基因的表达差异由什么上游机制驱动"这一问题,本研究补充三项探索性上游调控分析,均基于公开'
   '数据库和已发表工具,不涉及新的湿实验,结果性质为关联性、假设生成性,详见第4节局限性讨论。(1)TF-靶基因'
-  '富集:将5个ARGscore基因提交Enrichr(https://maayanlab.cloud/Enrichr)网络API,查询TRRUST v2、ChEA_2022、'
+  '富集:将5个ARGscore基因提交Enrichr[19,20](https://maayanlab.cloud/Enrichr)网络API,查询TRRUST v2[21]、ChEA_2022、'
   'ENCODE_TF_ChIP-seq_2015、TF_Perturbations_Followed_by_Expression四个转录因子-靶基因数据库,识别候选上游'
   '转录因子;对富集命中的TF-靶基因对,进一步在TCGA-COAD/READ(通过UCSC Xena HiSeqV2表达数据集,n=434)中'
   '计算TF与其靶基因的Spearman表达相关性,作为富集注释是否在本研究实际数据中得到体现的数据驱动验证,并对该'
@@ -250,7 +280,7 @@ p('为回应"这5个基因的表达差异由什么上游机制驱动"这一问�
   'HumanMethylation450甲基化芯片数据(n=370),对5个基因各自覆盖的CpG探针(4-65个不等),分别计算探针甲基化'
   'β值与配对mRNA表达量的Spearman相关性,识别负相关最强的探针作为候选功能性(启动子区)CpG位点,并计算该'
   '探针及基因平均甲基化水平与ARGscore本身的相关性。(3)全转录组TF-ARGscore关联:使用Lambert等(2018,Cell)'
-  '发表的人类转录因子权威列表(n=1639),提取TCGA-COAD/READ中全部可检出TF(n=1551)的表达量,与'
+  '[18]发表的人类转录因子权威列表(n=1639),提取TCGA-COAD/READ中全部可检出TF(n=1551)的表达量,与'
   'ARGscore做Spearman相关性分析并做Benjamini-Hochberg FDR校正,识别与ARGscore协同变化的TF全景,作为不局限于'
   '已知数据库注释、更广义的"上游调控子"候选来源。')
 
@@ -263,7 +293,7 @@ p('为回应"这5个基因的表达差异下游对应什么功能后果"这一�
   '主动血管生成信号活性,还是仅为血管相关细胞的结构性存在。(2)药物连接性分析:通过UCSC Xena一次性提取'
   'TCGA-COAD/READ HiSeqV2数据集全部20,502个可用基因symbol的表达量(n=380),计算每个基因(排除ARGscore'
   '自身的5个基因以避免循环论证)与ARGscore的Spearman相关性,取相关性最强的前150个基因("上调"signature)'
-  '及最弱(最负)的150个基因("下调"signature),提交至公开的L1000FWD连接图谱(Connectivity Map)网络API'
+  '及最弱(最负)的150个基因("下调"signature),提交至公开的L1000FWD[22]连接图谱(Connectivity Map)网络API'
   '(https://maayanlab.cloud/l1000fwd,基于LINCS L1000数据),检索其诱导的转录组特征与该signature最相反'
   '(候选逆转化合物)或最相似(候选拟表型化合物)的小分子。')
 
@@ -273,7 +303,7 @@ p('为回应"这5个基因的表达差异下游对应什么功能后果"这一�
 h1('3. 结果')
 
 h2('3.1 单细胞图谱显示ARGscore的5个基因分属三个独立的肿瘤微环境细胞程序')
-p('在GSE81861数据集(590个标注细胞)中,对36个ARGs及5个ARGscore基因进行细胞类型归因,结果清晰呈现出多个模块'
+p('在GSE81861数据集[2](590个标注细胞)中,对36个ARGs及5个ARGscore基因进行细胞类型归因,结果清晰呈现出多个模块'
   '(图1):VSIG4、CXCL10、OLR1、SPP1等富集于巨噬细胞;VCAN、POSTN、COL3A1、LUM等富集于成纤维细胞;VEGFA、'
   'JAG1、JAG2、ITGAV、PTK2、SLCO2A1及ZNF532富集于内皮细胞;CXCL13富集于T细胞。配对受体基因验证显示,'
   'FLT1/KDR(VEGFA受体)、NOTCH4(JAG1/JAG2受体)几乎仅在内皮细胞表达,PDGFRB(PDGFA受体)仅在成纤维细胞'
@@ -282,7 +312,7 @@ p('在GSE81861数据集(590个标注细胞)中,对36个ARGs及5个ARGscore基因
 fig("celltype_attribution_heatmap.png", width=14.5)
 caption('图1. GSE81861(Li et al. 2017)细胞类型归因热图。红色加粗基因为ARGscore的5基因预后签名。')
 
-p('在样本量显著更大的GSE178341数据集(370,115个细胞)中重新计算细胞类型归因(图2),原有结果得到系统性修正'
+p('在样本量显著更大的GSE178341数据集[3](370,115个细胞)中重新计算细胞类型归因(图2),原有结果得到系统性修正'
   '与深化:VSIG4(z=3.60)和CXCL10(z=2.96)确认归因于巨噬细胞;CXCL13(z=3.61)归因于CD8⁺T细胞;ZNF532此前在'
   '小样本中归因为内皮细胞(z=1.62),在大样本中修正为周细胞(pericyte,z=2.54,n=1,525);MEIS2此前误判为'
   '肥大细胞,修正为成纤维细胞(z=1.82,n=5,231)。更重要的是,大样本数据将血管相关基因进一步拆分为两个此前'
@@ -292,7 +322,7 @@ p('在样本量显著更大的GSE178341数据集(370,115个细胞)中重新计�
 fig("pelka_celltype_attribution_heatmap.png", width=15.0)
 caption('图2. GSE178341(Pelka et al. 2021,370,115个细胞)细胞类型归因热图。红色加粗基因为ARGscore的5基因预后签名。')
 
-p('在第三个独立数据集GSE146771(10,468个细胞,含Global_Cluster/Sub_Cluster两级官方注释)中进行定量验证'
+p('在第三个独立数据集GSE146771[4](10,468个细胞,含Global_Cluster/Sub_Cluster两级官方注释)中进行定量验证'
   '(图6),结果与前两个数据集高度一致:VSIG4、CXCL10精确定位于hM12_TAM-C1QC这一补体相关TAM亚型;CXCL13在'
   'hT18_CD8-LAYN(耗竭CD8⁺T细胞)及hT09_CD4-CXCL13亚群中均高表达;ZNF532与MEIS2共同定位于Myofib-ACTA2、'
   'CAF-FAP及Endothelium-ACKR1这一血管壁模块(经敏感性分析排除4个患者特异性噪声簇后确认)。')
@@ -309,7 +339,7 @@ fig("spatial_znf532_pericyte_map.png", width=16.5)
 caption('图5. GSM8265212(CTC21M转移灶切片)ZNF532与Pericyte marker模块的空间表达分布及相关性(n=3,884个组织内spot)。')
 
 h2('3.3 ARGscore与细胞组成模块在三个独立bulk队列中的关联及独立预后价值')
-p('在GSE39582(n=585)、GSE17536(n=177)及TCGA-COAD/READ(n=380)三个独立bulk队列中,ARGscore与5个独立marker'
+p('在GSE39582(n=585)[10]、GSE17536(n=177)[11]及TCGA-COAD/READ(n=380)[12]三个独立bulk队列中,ARGscore与5个独立marker'
   '模块打分的Spearman相关性汇总于表2。三个队列均一致显示,ARGscore与Pericyte模块的相关性始终最强'
   '(ρ=0.49–0.71),与Macrophage_TAM、Endothelial模块正相关,与CD8T、Bcell_TLS模块负相关,除个别队列中'
   'Macrophage_TAM或Bcell_TLS因样本量较小未达统计显著外,方向高度一致(图3)。')
@@ -337,7 +367,7 @@ fig("tcga_km_argscore.png", width=10.0)
 caption('图4. TCGA-COAD/READ队列中ARGscore中位数分组的OS生存曲线。')
 
 h2('3.4 独立泛癌种血管图谱证实ZNF532特异性富集于BASP1⁺内质网应激周细胞亚型')
-p('利用Pan-tumor Vasculature Atlas(~200,000细胞、372例患者、31种癌型)官方在线数据浏览器查询ZNF532表达'
+p('利用Pan-tumor Vasculature Atlas[5](~200,000细胞、372例患者、31种癌型)官方在线数据浏览器查询ZNF532表达'
   '分布(图7),发现内皮细胞、淋巴管内皮细胞及5个"常规"壁细胞亚型(matPC_Q静息态、myoPC肌样、adiPC脂肪样、'
   'vdPC血管发育相关、SMC平滑肌)的ZNF532表达分布均较窄且中位数为负值,呈均质低表达模式;唯独该图谱报道的'
   '头号新发现——BASP1⁺基质分泌型成熟周细胞(BASP1⁺ matPC)及其过渡态(inter.matPC)——表达分布明显更宽、'
@@ -497,7 +527,7 @@ p('GSE39582和TCGA-COAD/READ两个队列中,两种分组方法得到的HR和显�
 h2('3.13 基于已发表大规模队列CIBERSORT免疫浸润记录的独立外部验证')
 p('单细胞及marker模块层面的证据已支持ARGscore编码细胞组成这一命题,但这一结论若能在一个完全独立、'
   '样本量更大、且采用官方标准算法(CIBERSORT)而非本研究自建marker集的数据源中得到交叉验证,将显著'
-  '提升其稳健性。Zhang等(2023)在构建该模型时纳入的1214例患者(TCGA+GSE39582+GSE17536合并)的'
+  '提升其稳健性。Zhang等(2023)[1]在构建该模型时纳入的1214例患者(TCGA+GSE39582+GSE17536合并)的'
   '逐患者临床数据及CIBERSORT/ssGSEA/MCPcounter免疫浸润结果,已作为Supplementary Material随论文'
   '发表于期刊官网,是一个公开、可直接获取、无需额外授权的大规模外部基准数据源。本节利用这一资源,'
   '不比对ARGscore数值本身,而是直接检验本研究独立复现的细胞组成模块(marker基因z-score平均、正式'
@@ -550,7 +580,7 @@ p('综合来看,本节利用一个大规模、公开可及的已发表队列免�
 h2('3.14 三队列Meta分析:ARGscore预后效应的汇总估计')
 p('3.3/3.9节分别报告了三个独立队列的多因素Cox HR,但仅以文字描述"方向一致",未给出跨队列的汇总效应量。'
   '本节将三个队列的多因素Cox HR(ARGscore校正年龄/性别/分期后)在log(HR)尺度上做固定效应(逆方差加权)'
-  '和随机效应(DerSimonian-Laird)两种meta分析,并绘制森林图(图16)。')
+  '和随机效应(DerSimonian-Laird[15])两种meta分析,并绘制森林图(图16)。')
 fig("argscore_meta_analysis_forest_plot.png", width=15.0)
 caption('图16. 三个独立bulk队列ARGscore多因素Cox HR的meta分析森林图。')
 p('三个队列间存在中等程度异质性(Cochran\'s Q=5.12,df=2,I²=61.0%),与此前已指出的"TCGA队列效应量'
@@ -559,7 +589,7 @@ p('三个队列间存在中等程度异质性(Cochran\'s Q=5.12,df=2,I²=61.0%),
   '95% CI 1.62–2.44,P=5.2×10⁻¹¹)。两种模型下汇总HR的置信区间均完全不包含1,说明尽管队列间效应量'
   '存在异质性,ARGscore作为独立预后因子这一核心结论在跨队列汇总层面依然高度稳健。')
 
-h2('3.15 ARGscore与免疫模块的关联是否只是MSI/MMR状态的代理:校正检验')
+h2('3.15 ARGscore的免疫模块关联及自身预后价值是否只是MSI/MMR状态的代理:校正检验')
 p('该模型最初的构建研究报道ARGscore与MSI状态显著相关(ARGscore-low对应MSI-H)。这引出一个需要排除的混杂可能性:'
   '本研究发现的ARGscore与CD8T/Bcell_TLS/Macrophage_TAM等免疫模块的关联,是否只是在重复"MSI-H本身'
   '就是免疫热表型"这一已知事实,而非ARGscore提供了独立于MSI状态之外的信息?本节用GSE39582的'
@@ -579,12 +609,40 @@ p('在样本量最大、检验效能最充分的GSE39582队列(n=536)中,三个�
   '一致,更可能是样本量不足导致,而非关联本身不存在。综合来看,在检验效能最充分的队列中,MSI/MMR'
   '校正后关联强度基本不变,支持ARGscore与免疫细胞组成的关联是独立信号而非MSI状态的重复表达。')
 
+p('上述校正检验只处理了ARGscore与免疫模块之间的关联,尚未直接回答一个更根本的问题:ARGscore本身的'
+  '预后价值(即3.3节多因素Cox模型中报告的HR),是否也只是MSI/MMR状态的代理?为此本节进一步将MSI/MMR'
+  '状态作为显式协变量,重新纳入ARGscore自身的多因素Cox回归模型(此前3.3节的多因素模型仅校正age、'
+  'gender、stage,未校正MSI/MMR)。GSE39582队列(mmr.status完整可用,n=572)显示,加入MSI/MMR哑变量'
+  '前后,ARGscore的HR几乎不变:HR=2.25(95%CI 1.67–3.03,P=1.0×10⁻⁷)→HR=2.25(95%CI 1.67–3.03,'
+  'P<0.0001),而MSI/MMR哑变量本身在模型中不显著(HR=1.04,95%CI 0.64–1.69,P=0.87),说明ARGscore的'
+  '独立预后价值并非MSI/MMR状态的重复表达。TCGA-COAD/READ队列因MSI标注覆盖有限,基础模型(n=354,'
+  '与主分析一致)中ARGscore HR=1.45(95%CI 1.02–2.06,P=0.037);限定到MSI标注齐全的子集后样本骤降至'
+  'n=83(仅10例MSI-H,且这10例中无一例发生OS事件,标准Cox回归出现近似完全分离,改用ridge惩罚Cox回归'
+  '[penalizer=0.1]稳定估计),该子集中ARGscore HR=1.19(95%CI 0.64–2.23,P=0.59)未达统计显著(表7)。'
+  '这一结果的检验效能受限于极小的样本量和MSI-H分层内的零事件问题,不应解读为对GSE39582队列结果的'
+  '否定,而应视为受限于该队列MSI标注覆盖率的探索性观察;GSE39582作为样本量最大、检验效能最充分的'
+  '队列,其结果支持ARGscore的预后价值独立于MSI/MMR状态。')
+add_table(
+    headers=['队列', '模型', 'n', 'ARGscore HR (95% CI)', 'P值'],
+    rows=[
+        ['GSE39582', '基础模型(age+gender+stage)', '572', '2.25 (1.67–3.03)', '1.0×10⁻⁷'],
+        ['GSE39582', '+MSI/MMR', '572', '2.25 (1.67–3.03)', '<0.0001'],
+        ['TCGA-COAD/READ', '基础模型(age+gender+stage)', '354', '1.45 (1.02–2.06)', '0.037'],
+        ['TCGA-COAD/READ', '+MSI(仅MSI标注亚组,ridge惩罚Cox稳定估计)ᵃ', '83', '1.19 (0.64–2.23)', '0.59'],
+    ],
+    widths=[3.5, 6.0, 1.5, 3.5, 2.0]
+)
+caption('表7. ARGscore多因素Cox回归风险比(HR),校正MSI/MMR状态前后对比')
+p('ᵃ 该亚组中MSI-H(n=10)患者0例发生OS事件,标准最大似然Cox回归出现近似完全分离(收敛不稳定),故改用'
+  'ridge惩罚Cox回归(penalizer=0.1)稳定估计;样本量小、检验效能有限,该子集结果应视为探索性,不构成'
+  '对GSE39582结果的挑战。GSE17536队列因缺乏MSI/MMR标注字段,未纳入本节校正检验。', size=9.5)
+
 h2('3.16 多重检验校正:全篇报告相关性检验的假发现率(FDR)复核')
 p('本研究在3.3节(ARGscore与5个marker模块的相关性)、3.9节(NNLS反卷积细胞比例与ARGscore的相关性)、'
   '3.13节(本研究细胞组成模块/ARGscore与已发表队列CIBERSORT的相关性)、3.15节(MSI/MMR校正前后的关联)'
   '合计报告了较多相关性检验的P值,但此前均未做多重检验校正。本节对这四组相关性检验分别在各自组内'
   '(而非跨组混合)做Benjamini-Hochberg FDR校正——按各自然家族分别校正是更恰当的做法,因为四组检验'
-  '回答的是四个不同的问题,混在一起校正反而会人为抬高检验的保守程度(表7)。')
+  '回答的是四个不同的问题,混在一起校正反而会人为抬高检验的保守程度(表8)。')
 add_table(
     headers=['检验家族', '检验数', '原始P<0.05显著数', 'FDR q<0.05显著数', '校正后失去显著性数'],
     rows=[
@@ -595,7 +653,7 @@ add_table(
     ],
     widths=[6.5, 2.0, 2.8, 2.8, 3.0]
 )
-caption('表7. 四组相关性检验家族的FDR校正结果汇总')
+caption('表8. 四组相关性检验家族的FDR校正结果汇总')
 p('结果显示,全篇报告四组家族共81项相关性检验中,68项在原始P<0.05水平显著;经组内FDR校正后,这68项'
   '全部依然满足q<0.05,无一项因多重检验校正而失去显著性。这一结果的主要原因是本研究绝大多数报告为'
   '显著的相关性检验P值本身远小于0.05(多数在10⁻⁴至10⁻⁴⁰量级),即便按较为保守的方式校正也不会被推'
@@ -604,7 +662,7 @@ p('结果显示,全篇报告四组家族共81项相关性检验中,68项在原�
 
 h2('3.17 换用有真实响应标签的更大队列重新检验免疫治疗关联(GSE236581)')
 p('3.7节的核心缺陷是GSE205506缺少患者级响应标签,只能做"治疗组间"而非"响应预测"的比较。搜索后找到'
-  'GSE236581(Chen, Wang, Li et al., Cancer Cell 2024,北京大学张泽民实验室),该数据集恰好弥补了'
+  'GSE236581(Chen, Wang, Li et al., Cancer Cell 2024[17],北京大学张泽民实验室),该数据集恰好弥补了'
   '这一缺陷:22例CRC/十二指肠癌患者接受新辅助anti-PD-1治疗,169个跨组织(血液/癌旁/肿瘤)、跨治疗'
   '时间点的10x单细胞样本,975,275个高质量细胞。原始fastq因中国人类遗传资源管理条例存放于GSA未公开,'
   '但处理好的表达矩阵、条形码、基因列表及完整细胞元数据均已在GEO公开,且该研究的Supplementary Table S1'
@@ -639,7 +697,7 @@ p('利用TRRUST v2文献精编数据库对5个基因做TF富集,10个显著命�
   'ZNF532)、E2F1(靶向VSIG4/CXCL10/CXCL13/MEIS2),因输入基因数过少(仅5个),校正后均未达q<0.05'
   '(q=0.27-0.44),仅作为假设来源。TF微扰表达库(TF_Perturbations_Followed_by_Expression)提示MYC过'
   '表达(q<0.001)及FOSL1敲除(q=0.003)显著改变VSIG4/CXCL10/CXCL13的表达模式。')
-p('对上述全部候选TF-靶基因对,在TCGA-COAD/READ(n=434)中做数据驱动的验证(图19、表8):STAT1-CXCL10'
+p('对上述全部候选TF-靶基因对,在TCGA-COAD/READ(n=434)中做数据驱动的验证(图19、表9):STAT1-CXCL10'
   '(ρ=0.79)、IRF1-CXCL10(ρ=0.66)两组呈现全篇报告中最强的相关性,与CXCL10(即经典干扰素刺激基因'
   'IP-10)受IFN-STAT1/IRF轴直接诱导这一教科书级机制高度吻合,IRF7、RELA、BCL3、IRF3、NFKB1与'
   'CXCL10/CXCL13的相关性同样全部方向正确且经FDR校正后显著(q<0.05)。更具提示性的是,ChEA_2022库中'
@@ -652,7 +710,7 @@ p('对上述全部候选TF-靶基因对,在TCGA-COAD/READ(n=434)中做数据驱�
   '标记的是分化态间质/免疫细胞程序而非增殖性肿瘤细胞本身这一定位一致。')
 fig("tf_target_correlation_heatmap.png", width=11.0)
 caption('图19. 候选上游转录因子与5个ARGscore基因表达量的相关性热图(TCGA-COAD+READ,n=434)。')
-p('表8. 5个基因最强负相关CpG探针的甲基化-表达相关性(TCGA-COAD+READ,n=370)', bold=True, size=10.5)
+p('表9. 5个基因最强负相关CpG探针的甲基化-表达相关性(TCGA-COAD+READ,n=370)', bold=True, size=10.5)
 add_table(
     ['基因', '探针', 'ρ(甲基化 vs 表达)', 'FDR q值'],
     [
@@ -667,7 +725,7 @@ add_table(
 
 h2('3.19 DNA甲基化是5个基因共有的候选上游调控层,ZNF532甲基化亦与ARGscore本身直接相关')
 p('对TCGA-COAD/READ HumanMethylation450数据(n=370)逐基因检验全部覆盖CpG探针后发现,5个基因均至少存在'
-  '一个与自身mRNA表达显著负相关的CpG位点(表8、图20A),提示启动子区甲基化沉默是这5个基因表达调控的'
+  '一个与自身mRNA表达显著负相关的CpG位点(表9、图20A),提示启动子区甲基化沉默是这5个基因表达调控的'
   '共同候选机制,相关性强度从CXCL13(ρ=−0.17)到ZNF532(ρ=−0.50)不等。ZNF532的负相关最强且最显著'
   '(cg04212150,ρ=−0.50,q=2.1×10⁻²³,图20B),同时该探针及基因平均甲基化水平还与ARGscore本身显著'
   '负相关(ρ=−0.225,P=1.2×10⁻⁵)——由于ZNF532在ARGscore线性公式中的系数为正(+0.2754),"甲基化程度'
@@ -681,7 +739,7 @@ fig("methylation_upstream_regulation.png", width=16.0)
 caption('图20. 5个基因最强负相关CpG探针的相关系数汇总(A)及ZNF532该探针的甲基化-表达散点图(B)。')
 
 h2('3.20 全转录组TF-ARGscore关联分析:Hedgehog/GLI通路及血管间质相关转录因子位居正相关TF前列')
-p('不局限于已知TF-靶基因数据库注释,进一步用Lambert等(2018)人类转录因子权威列表(n=1639)在TCGA-COAD/'
+p('不局限于已知TF-靶基因数据库注释,进一步用Lambert等(2018)[18]人类转录因子权威列表(n=1639)在TCGA-COAD/'
   'READ(n=380)中系统检验全部可检出TF(n=1551)与ARGscore的相关性,1548个TF中749个在FDR q<0.01水平'
   '显著——这一比例远高于随机预期,提示ARGscore作为一个复合表达评分,与肿瘤微环境整体的基质/免疫细胞'
   '组成(而非仅5个基因本身)存在广泛的转录层面共变,这与本研究此前反复论证的"ARGscore实为细胞组成的'
@@ -720,8 +778,8 @@ p('在TCGA-COAD/READ全部20,497个可检验基因(已排除ARGscore自身5个�
   'L1000FWD后检索到50个候选逆转化合物(诱导相反表达特征)及50个候选拟表型化合物(诱导相似表达特征)。'
   '需要如实说明,LINCS L1000筛选文库以大量未经系统命名/未获批准的工具化合物("screening library"内部'
   '编号)为主,检索结果中相当一部分(约一半)是无法识别名称的化合物,不构成任何药物层面的结论,本节仅对'
-  '其中少数可识别、具有明确既知药理机制的化合物做出提示性、假设生成性质的解读(表9)。')
-p('表9. L1000FWD检索到的部分可识别化合物(仅列出有明确药理机制注释者)', bold=True, size=10.5)
+  '其中少数可识别、具有明确既知药理机制的化合物做出提示性、假设生成性质的解读(表10)。')
+p('表10. L1000FWD检索到的部分可识别化合物(仅列出有明确药理机制注释者)', bold=True, size=10.5)
 add_table(
     ['方向', '化合物', '已知药理机制', '连接性得分'],
     [
@@ -756,6 +814,53 @@ p('图23整合了3.1-3.22节的全部核心发现,呈现从上游调控到临床
 fig("mechanism_overview.png", width=14.0)
 caption('图23. ARGscore从上游调控到临床结局的综合机制示意图,整合本研究全部核心发现(与图形摘要为同一图)。')
 
+h2('3.24 ESTIMATE肿瘤纯度算法交叉验证:ARGscore与ssGSEA StromalScore/ImmuneScore的关联')
+p('原文(Zhang et al. 2023)构建ARGscore时使用ESTIMATE算法[23]报告了与基质/免疫评分的关联,而本研究此前的'
+  '外部交叉验证(3.13节)仅使用了CIBERSORT这一种反卷积/富集算法。为补齐这一验证维度,本节独立实现ESTIMATE'
+  '算法的核心步骤,作为与CIBERSORT正交的第二种方法学验证。具体而言:采用Yoshihara等(2013)Nature '
+  'Communications发表的官方StromalSignature、ImmuneSignature基因集(各141个基因,从ESTIMATE R包v1.0.11的'
+  'SI_geneset.gmt数据文件提取),对每一队列的全转录组表达矩阵(GSE39582:GPL570平台21,655个基因;'
+  'GSE17536:同平台21,655个基因;TCGA-COAD/READ:通过UCSC Xena获取20,502个基因)逐样本计算单样本基因集'
+  '富集分析(ssGSEA,权重参数α=0.25,秩次排序,与GSVA/ESTIMATE默认参数一致),得到StromalScore、'
+  'ImmuneScore,二者之和为ESTIMATEScore。需要特别说明两点方法学边界:第一,ARGscore的5个基因之一VSIG4'
+  '本身就是ESTIMATE StromalSignature 141个基因之一,因此ARGscore与StromalScore的关联并非完全独立的正交'
+  '证据,其中一部分统计关联在结构上是共享基因导致的,这一点与3.13节CIBERSORT验证(其细胞比例来自独立于'
+  'ARGscore基因的247基因特征矩阵)存在本质区别,应如实说明而非回避;第二,ESTIMATE原文提供的cos()公式可将'
+  'ESTIMATEScore换算为绝对肿瘤纯度百分比,但该公式的两个经验常数是基于原作者GSVA/ESTIMATE R包在Affymetrix '
+  'U133A平台上的特定ssGSEA标准化实现校准得到的,本研究的Python重新实现无法保证与原始实现完全同尺度,因此'
+  '本节仅报告基于秩次的Spearman相关(不受尺度差异影响),不尝试换算绝对肿瘤纯度百分比。')
+add_table(
+    headers=['队列', '评分', 'n', 'Spearman ρ', 'P值'],
+    rows=[
+        ['GSE39582', 'StromalScore', '585', '0.39', '<0.0001'],
+        ['GSE39582', 'ImmuneScore', '585', '−0.03', '0.506'],
+        ['GSE39582', 'ESTIMATEScore', '585', '0.21', '<0.0001'],
+        ['GSE17536', 'StromalScore', '177', '0.36', '<0.0001'],
+        ['GSE17536', 'ImmuneScore', '177', '−0.30', '<0.001'],
+        ['GSE17536', 'ESTIMATEScore', '177', '0.06', '0.431'],
+        ['TCGA-COAD/READ', 'StromalScore', '380', '0.54', '<0.0001'],
+        ['TCGA-COAD/READ', 'ImmuneScore', '380', '0.12', '0.023'],
+        ['TCGA-COAD/READ', 'ESTIMATEScore', '380', '0.37', '<0.0001'],
+    ],
+    widths=[3.5, 3.0, 1.5, 2.5, 2.0]
+)
+caption('表11. ARGscore与ssGSEA StromalScore/ImmuneScore/ESTIMATEScore的Spearman相关性')
+fig("estimate_crossvalidation.png", width=15.0)
+caption('图24. ARGscore与ESTIMATE算法(ssGSEA StromalScore/ImmuneScore/ESTIMATEScore)的关联散点图,三队列颜色区分。')
+p('结果显示,StromalScore与ARGscore在三个队列中方向一致且稳健显著正相关(ρ=0.36–0.54,全部P<0.0001),与'
+  '3.13节CIBERSORT验证中ARGscore与M2巨噬细胞/基质相关细胞比例的正相关方向一致,即使考虑到VSIG4基因重叠'
+  '这一结构性因素,三队列效应量的一致性与3.9节NNLS反卷积、3.13节CIBERSORT两种独立方法得到的周细胞/基质'
+  '关联结果相互印证,支持ARGscore确实携带基质细胞组成信息这一结论。相比之下,ImmuneScore与ARGscore的关联'
+  '在三队列间方向不一致且效应量普遍较弱(GSE39582:ρ=−0.03,不显著;GSE17536:ρ=−0.30;TCGA:ρ=0.12),与'
+  '3.13节中ARGscore和CIBERSORT特定免疫细胞亚型(M2巨噬细胞、CD8T)方向一致且稳健的关联形成对比。这一差异'
+  '并不矛盾:ImmuneScore是一个笼统的"总体免疫浸润"评分,而ARGscore中与免疫相关的基因(CXCL10、CXCL13)'
+  '标记的是特定的免疫细胞程序(IFN驱动的M2极化巨噬细胞、CD8T/三级淋巴结构),而非广谱免疫浸润强度本身,'
+  '二者方向可能因队列间免疫细胞亚型构成比例不同而不一致,这与3.13节"ARGscore与M2极化比例[而非笼统M1+M2'
+  '合并比例]稳健正相关"这一更精细的发现逻辑一致。ESTIMATEScore作为两者之和,其与ARGscore的关联强度居中'
+  '且同样受ImmuneScore不一致性的拖累(GSE17536中仅ρ=0.06,不显著)。综合来看,ESTIMATE算法作为第二种独立'
+  '于CIBERSORT的反卷积/富集方法,在基质细胞组成这一维度上稳健支持了本研究的核心结论,而在免疫细胞组成维度'
+  '上的不一致恰恰佐证了ARGscore捕捉的是特定免疫细胞亚型而非笼统免疫浸润这一更具体的机制假说。')
+
 # ============================================================
 # 4. Discussion
 # ============================================================
@@ -769,10 +874,10 @@ p('本研究以结直肠癌预后模型ARGscore为案例,系统检验了一个�
   '独立于ARGscore本身的价值:它为反卷积-预后签名这一广泛使用的研究范式,提供了一个具体、可复现的'
   '单细胞分辨率反例,并将"基因签名的命名是否等于其生物学机制"这一问题,从方法论层面的怀疑推进至具有'
   '细胞来源归因和可检验机制假说的实证层面。')
-p('在对本研究三个核心发现进行文献查证时发现,VSIG4驱动巨噬细胞M2极化这一机制已于近期发表(相关文献报道'
+p('在对本研究三个核心发现进行文献查证时发现,VSIG4驱动巨噬细胞M2极化这一机制已于近期发表[7](相关文献报道'
   '肿瘤源乳酸通过JAK2/STAT3通路诱导VSIG4⁺ M2型TAM极化,VSIG4抑制可协同抗PD-1治疗),本研究的单细胞验证'
   '应定位为独立于该机制的正交证据支持,而非新发现。类似地,CXCL13标记耗竭T细胞并驱动三级淋巴结构形成'
-  '这一现象已在多个泛癌种T细胞图谱研究中得到确立,本研究的贡献同样在于验证而非发现。相比之下,ZNF532-'
+  '这一现象已在多个泛癌种T细胞图谱研究中得到确立[9],本研究的贡献同样在于验证而非发现。相比之下,ZNF532-'
   '血管周细胞这一关联在本研究开展时未见任何既往文献报道,是本研究novelty最高的核心主张。在为投稿进行'
   '查重核实的过程中,本研究意外地在一个独立发表的泛癌种肿瘤血管图谱(涵盖约20万细胞、372例患者、31种'
   '癌型)中查证到,该图谱虽未在正文中提及ZNF532,但其配套的官方在线数据浏览器实际收录了该基因的表达'
@@ -808,10 +913,16 @@ p('此外,该泛癌种图谱提供的配体-受体互作数据显示,BASP1⁺周
   '正相关,精确对应VSIG4驱动M2极化这一机制假说。3.14节的meta分析进一步给出了ARGscore预后效应的'
   '跨队列汇总估计(随机效应HR=2.01,95% CI 1.43–2.83),尽管队列间存在中等异质性(I²=61.0%,主要'
   '来自TCGA队列),汇总置信区间依然完全不包含1。3.15节排除了另一个重要的混杂可能性——在检验效能'
-  '最充分的GSE39582队列中,ARGscore与免疫模块的关联在校正MSI/MMR状态后几乎不变,证实这些关联提供'
-  '的是独立于MSI状态之外的信息,而非对已知ARGscore-MSI关系的简单重复。3.16节对全篇报告四组相关性'
+  '最充分的GSE39582队列中,ARGscore与免疫模块的关联、以及ARGscore自身在多因素Cox模型中的预后HR,'
+  '在校正MSI/MMR状态后均几乎不变(ARGscore HR=2.25校正前后不变,P<0.0001;MSI/MMR哑变量本身不'
+  '显著,P=0.87),证实这些关联及ARGscore本身的预后价值提供的是独立于MSI状态之外的信息,而非对已知'
+  'ARGscore-MSI关系的简单重复。3.16节对全篇报告四组相关性'
   '检验家族(共81项检验)分别做Benjamini-Hochberg FDR校正,68项原始显著结果全部在校正后依然满足'
-  'q<0.05,排除了假发现率膨胀对本研究结论的影响。')
+  'q<0.05,排除了假发现率膨胀对本研究结论的影响。3.24节补齐了原文使用的ESTIMATE算法这一验证维度:与'
+  '3.13节CIBERSORT结果一致,ARGscore与ssGSEA StromalScore在三队列中稳健正相关(ρ=0.36–0.54),而与'
+  '笼统ImmuneScore的关联方向不一致,后者恰好佐证了ARGscore捕捉的是特定免疫细胞亚型(M2极化TAM、'
+  'CD8T/TLS)而非广谱免疫浸润这一更具体的机制定位;但该节也如实指出,ARGscore基因之一VSIG4本身即为'
+  'ESTIMATE StromalSignature成员,故该项验证的独立性弱于CIBERSORT验证,应结合两者综合判断。')
 p('在完成上述以"这5个基因的表达差异关联什么细胞程序"为核心的下游验证后,本研究进一步补充了三项探索'
   '"这些表达差异由什么上游机制驱动"的分析(3.18-3.20节)。TF-靶基因富集及其TCGA数据驱动验证显示,'
   'CXCL10/CXCL13的上游高度符合经典干扰素(STAT1/IRF1/IRF7)与NF-κB(NFKB1/RELA/BCL3)通路预期,这是'
@@ -840,7 +951,7 @@ p('补充上游分析后,本研究进一步用两项下游分析检验"表达差
 
 h2('4.1 局限性')
 p('本研究存在以下局限。第一,VSIG4是否为肿瘤相关巨噬细胞M2极化表型的必需驱动因子尚存争议(体外机制证据'
-  '支持其驱动作用,但已有体内敲除模型研究未观察到肿瘤生长的显著改变),这一因果关系问题无法通过公开数据'
+  '支持其驱动作用,但已有体内敲除模型研究未观察到肿瘤生长的显著改变[8]),这一因果关系问题无法通过公开数据'
   '解决,需依赖细胞水平的功能验证实验。第二,ARGscore的计算直接套用该模型已发表的线性公式作用于各队列'
   '的标准化表达值,未能完全还原其最初构建时使用的预处理流程细节(标准化方法、批次效应处理、TCGA数据'
   '版本等),因此本研究计算得到的ARGscore绝对数值及多因素Cox/AUC的具体数值与最初报道的数值不完全相同。'
@@ -903,6 +1014,47 @@ p('本研究通过整合单细胞转录组、空间转录组及独立bulk队列�
   '细胞水平实验直接检验的通路及药物层面切入点。')
 
 # ============================================================
+# End matter: Ethics, COI, Funding, Acknowledgments, Data Availability
+# ============================================================
+h1('伦理声明')
+p('本研究仅使用公开、去识别化的人类基因组学数据集(TCGA、GEO及相关公开数据库),不涉及任何新的人体或动物'
+  '实验、新的样本采集,亦未接触任何可识别患者身份的信息,故不需要伦理委员会审批。')
+
+h1('利益冲突声明')
+p('作者声明本研究的开展不存在任何可能被视为潜在利益冲突的商业或财务关系。')
+
+h1('基金资助声明')
+p('本研究未获得任何公共、商业或非营利性资助机构的经费支持。')
+
+h1('致谢')
+p('图形摘要及机制示意图(图形摘要、图23)使用BioRender(BioRender.com)绘制。')
+
+h1('数据可及性声明')
+p('本研究所用全部原始数据均为公开数据集,可通过NCBI GEO(accession号:GSE81861、GSE178341、GSE146771、'
+  'GSE267401、GSE39582、GSE17536、GSE205506、GSE236581)及UCSC Xena经典枢纽(tcga.xenahubs.net,'
+  'TCGA-COAD/READ表达、突变、拷贝数、甲基化及临床数据)获取;Pan-tumor Vasculature Atlas数据通过其官方'
+  '在线数据浏览器(resource.yin-lab.com/Panvascular)查询;TF富集、甲基化及药物连接性分析分别通过'
+  'Enrichr(maayanlab.cloud/Enrichr)、UCSC Xena、L1000FWD(maayanlab.cloud/l1000fwd)公开API完成。'
+  '原文(Zhang et al. 2023)发表的Supplementary Material通过期刊官网公开下载,用于3.13节的外部交叉'
+  '验证,但本身不属于本研究原创数据,不在本声明范围内重新分发。具体而言:TCGA突变/CNV/甲基化数据通过'
+  'UCSC Xena经典枢纽(xenaPython接口)获取;CellPhoneDB配体-受体数据库为公开学术资源,通过官方工具下载,'
+  '无需额外授权;TCGA MSI状态(microsatellite_instability字段)通过UCSC Xena TCGA经典枢纽的'
+  'clinicalMatrix获取,用于3.15节的校正检验;GSE236581(Chen et al. 2024 Cancer Cell)的处理好表达'
+  '矩阵、条形码、基因列表、细胞元数据及Table S1患者响应标签均通过GEO/期刊官网公开下载,用于3.17节的'
+  '免疫治疗响应检验;3.18节TF-靶基因富集查询TRRUST v2/ChEA_2022/ENCODE_TF_ChIP-seq_2015/'
+  'TF_Perturbations_Followed_by_Expression四个数据库;3.20节使用的人类转录因子列表下载自Lambert等'
+  '(2018)配套的公开资源(humantfs.ccbr.utoronto.ca)。3.24节使用的ESTIMATE StromalSignature/'
+  'ImmuneSignature基因集(各141个基因)提取自ESTIMATE R包v1.0.11的SI_geneset.gmt数据文件;GSE39582/'
+  'GSE17536的全转录组表达矩阵通过对应series matrix文件(NCBI GEO)结合GPL570(Affymetrix HG-U133 '
+  'Plus 2.0)平台探针注释文件解析获得,TCGA-COAD/READ全转录组表达矩阵通过UCSC Xena经典枢纽'
+  '(xenaPython接口)获取;ssGSEA计算使用开源Python包gseapy完成。')
+p('本研究涉及的全部原始分析代码、图表及中间结果数据表已公开发布于GitHub仓库:'
+  'https://github.com/yunzhennan0431-maker/argscore-crc-revisited(MIT许可,基于Python,依赖'
+  'pandas/numpy/scipy/h5py/lifelines/scikit-survival/matplotlib/scikit-learn/gseapy/CellPhoneDB v5.0.1);'
+  '该仓库不含原文版权所有的Supplementary Material及任何原始测序/芯片数据。完整分析流程记录见项目日志'
+  '"日志.md"。如有进一步问题,请联系通讯作者。')
+
+# ============================================================
 # References
 # ============================================================
 h1('参考文献')
@@ -929,30 +1081,11 @@ refs = [
     'Kuleshov MV, Jones MR, Rouillard AD, et al. Enrichr: a comprehensive gene set enrichment analysis web server 2016 update. Nucleic Acids Res. 2016;44(W1):W90-97. doi:10.1093/nar/gkw377',
     'Han H, Cho JW, Lee S, et al. TRRUST v2: an expanded reference database of human and mouse transcriptional regulatory interactions. Nucleic Acids Res. 2018;46(D1):D380-386. doi:10.1093/nar/gkx1013',
     "Wang Z, Lachmann A, Keenan AB, Ma'ayan A. L1000FWD: fireworks visualization of drug-induced transcriptomic signatures. Bioinformatics. 2018;34(12):2150-2152. doi:10.1093/bioinformatics/bty060",
+    'Yoshihara K, Shahmoradgoli M, Martinez E, et al. Inferring tumour purity and stromal and immune cell admixture from expression data. Nat Commun. 2013;4:2612. doi:10.1038/ncomms3612',
 ]
 for i, r in enumerate(refs, 1):
     para = doc.add_paragraph()
     para.add_run(f'{i}. {r}').font.size = Pt(9.5)
-
-h1('数据与代码可及性说明')
-p('本研究涉及的全部原始分析代码(Python,基于pandas/numpy/scipy/h5py/lifelines/scikit-survival/matplotlib/'
-  'scikit-learn/CellPhoneDB v5.0.1)、图表及中间结果数据表已公开发布于GitHub仓库:'
-  'https://github.com/yunzhennan0431-maker/argscore-crc-revisited(MIT许可,不含原文版权所有的'
-  'Supplementary Material及任何原始测序/芯片数据),完整分析流程记录见项目日志"日志.md"。TCGA突变/CNV数据通过UCSC Xena'
-  '经典枢纽(xenaPython接口)获取;CellPhoneDB配体-受体数据库为公开学术资源,通过官方工具下载,无需额外'
-  '授权。Zhang等(2023)发表的Supplementary Material(含逐患者临床数据及CIBERSORT/ssGSEA/'
-  'MCPcounter结果)通过期刊官网公开下载,保存于analysis_output/original_paper_supplementary文件夹,'
-  '用于3.13节的外部交叉验证。TCGA MSI状态(microsatellite_instability字段)通过UCSC Xena TCGA经典'
-  '枢纽的clinicalMatrix获取,用于3.15节的校正检验。GSE236581(Chen et al. 2024 Cancer Cell)的处理好'
-  '表达矩阵、条形码、基因列表、细胞元数据及Table S1患者响应标签均通过GEO/期刊官网公开下载,用于'
-  '3.17节的免疫治疗响应检验。3.18节TF-靶基因富集通过Enrichr公开网络API(https://maayanlab.cloud/Enrichr)'
-  '查询TRRUST v2/ChEA_2022/ENCODE_TF_ChIP-seq_2015/TF_Perturbations_Followed_by_Expression四个数据库'
-  '完成;3.19节甲基化数据(HumanMethylation450)及3.18/3.20节TF表达数据均通过UCSC Xena经典枢纽获取;'
-  '3.20节使用的人类转录因子列表下载自Lambert等(2018)配套的公开资源(humantfs.ccbr.utoronto.ca)。'
-  '3.21节血管生成信号基因及3.22节全转录组signature均通过UCSC Xena HiSeqV2数据集一次性提取'
-  '(20,502个基因symbol);3.22节药物连接性分析通过L1000FWD公开网络API(https://maayanlab.cloud/l1000fwd)'
-  '完成,检索结果原始数据保存于analysis_output/data文件夹。',
-  size=9.5, italic=True)
 
 doc.save(OUT)
 print("Paper saved:", OUT)
